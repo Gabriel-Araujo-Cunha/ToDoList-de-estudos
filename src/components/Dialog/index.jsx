@@ -1,26 +1,28 @@
+import React, { useRef } from "react";
 import "./dialog.style.css";
 
 export function Dialog() {
-  const dialog = document.querySelector("dialog");
-  const showButton = document.querySelector("dialog + button");
-  const closeButton = document.querySelector("dialog button");
+  // Não deveríamos fazer buscas no DOM desse jeito!
+  //const dialog = document.querySelector("dialog");
+
+  const dialogRef = useRef(null);
 
   // "Show the dialog" button opens the dialog modally
-  showButton.addEventListener("click", () => {
-    dialog.showModal();
-  });
+  const openDialog = () => {
+    dialogRef.current.showModal();
+  };
 
   // "Close" button closes the dialog
-  closeButton.addEventListener("click", () => {
-    dialog.close();
-  });
+  const closeDialog = () => {
+    dialogRef.current.close();
+  };
   return (
-    <>
-      <dialog>
-        <button autofocus>Close</button>
+    <React.Fragment>
+      <dialog ref={dialogRef}>
+        <button autoFocus onClick={closeDialog}>Close</button>
         <p>This modal dialog has a groovy backdrop!</p>
       </dialog>
-      <button>Show the dialog</button>
-    </>
+      <button onClick={openDialog}>Show the dialog</button>
+    </React.Fragment>
   );
 }
