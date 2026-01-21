@@ -12,9 +12,8 @@ import TodoContext from "./components/TodoProvider/TodoContext";
 import { TodoGroup } from "./components/TodoGroup";
 
 function App() {
-
   const [showDialog, setShowDialog] = useState(false);
-  
+
   const { todos, addTodo } = use(TodoContext);
 
   const toogleDialog = () => {
